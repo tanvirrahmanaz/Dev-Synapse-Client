@@ -9,64 +9,59 @@ import {
     signOut,
     updateProfile
 } from "firebase/auth";
-import app from '../firebase/firebase.config'; // আপনার ফায়ারবেস কনফিগারেশন ফাইল
+import app from '../firebase/firebase.config'; // আপনার ফায়ারবেস কনফিগারেশন ফাইল
 
 // ১. কনটেক্সট তৈরি করা হলো
 export const AuthContext = createContext(null);
 
-// ফায়ারবেস থেকে auth অবজেক্ট নেওয়া হচ্ছে
+// ফায়ারবেস থেকে auth অবজেক্ট নেওয়া হচ্ছে
 const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     // ২. ব্যবহারকারীর তথ্য এবং লোডিং অবস্থা রাখার জন্য দুটি স্টেট
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // ৩. ফায়ারবেসের বিভিন্ন অথেনটিকেশন ফাংশনকে র‍্যাপ করে নতুন ফাংশন তৈরি করা
+    // ৩. ফায়ারবেসের বিভিন্ন অথেনটিকেশন ফাংশনকে র‍্যাপ করে নতুন ফাংশন তৈরি করা
     
-    // ইমেইল ও পাসওয়ার্ড দিয়ে নতুন ইউজার তৈরি
     const createUser = (email, password) => {
-        setLoading(true); // কাজ শুরুর আগে লোডিং শুরু
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
-    // ইমেইল ও পাসওয়ার্ড দিয়ে লগইন
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
-
-    // গুগল দিয়ে লগইন
+    
     const googleSignIn = () => {
         setLoading(true);
+        const googleProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleProvider);
     };
 
-    // ব্যবহারকারীর প্রোফাইল (নাম এবং ছবি) আপডেট করা
     const updateUserProfile = (name, photoURL) => {
         return updateProfile(auth.currentUser, {
             displayName: name, 
             photoURL: photoURL
         });
     };
-
-    // লগআউট
+    
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
     };
 
     // ৪. ব্যবহারকারীর লগইন অবস্থা পর্যবেক্ষণের জন্য useEffect
-    // এটি পুরো অ্যাপ্লিকেশনের সবচেয়ে গুরুত্বপূর্ণ অংশগুলোর একটি
+    // এখন এর কাজ শুধু user এবং loading স্টেট আপডেট করা
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log('Current user state:', currentUser);
-            setUser(currentUser); // ব্যবহারকারীর অবস্থা সেট করা হচ্ছে
-            setLoading(false); // পর্যবেক্ষণ শেষ, তাই লোডিং বন্ধ
+            setUser(currentUser);
+            console.log('Currently logged in user:', currentUser);
+            setLoading(false);
         });
 
-        // কম্পোনেন্ট আনমাউন্ট হলে পর্যবেক্ষকটিকে বন্ধ করা হয় (মেমোরি লিক রোধ করতে)
+        // কম্পোনেন্ট আনমাউন্ট হলে পর্যবেক্ষকটিকে বন্ধ করা হয়
         return () => {
             return unsubscribe();
         };
