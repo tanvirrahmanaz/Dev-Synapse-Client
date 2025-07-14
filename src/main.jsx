@@ -2,17 +2,27 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css' // আপনার মূল CSS ফাইল
+import './index.css'
 import { RouterProvider } from "react-router-dom";
-import router from './Routes/Routes'; // আমরা এই ফাইলটি একটু পরেই তৈরি করব
-import AuthProvider from './providers/AuthProvider'; // আপনার AuthProvider
+import router from './Routes/Routes';
+import AuthProvider from './providers/AuthProvider';
+
+// Tanstack Query থেকে প্রয়োজনীয় জিনিস ইম্পোর্ট করুন
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+// QueryClient এর একটি নতুন ইনস্ট্যান্স তৈরি করুন
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* AuthProvider দিয়ে পুরো অ্যাপকে র‍্যাপ করা হয়েছে যাতে সব জায়গায় user তথ্য পাওয়া যায় */}
-    <AuthProvider>
-      {/* RouterProvider অ্যাপ্লিকেশনে রাউটিং ক্ষমতা যোগ করে */}
-      <RouterProvider router={router} />
-    </AuthProvider>
+    {/* QueryClientProvider দিয়ে পুরো অ্যাপকে র‍্যাপ করুন */}
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

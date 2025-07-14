@@ -8,7 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard"; // Assuming you have a Dashboard component
-
+import PostDetails from "../pages/PostDetails"; // Assuming you have a PostDetails component
 const router = createBrowserRouter([
   {
     path: "/", // এটি হলো প্যারেন্ট রুট
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/membership",
-        element: <PrivateRoute><Dashboard /></PrivateRoute>, // PrivateRoute ব্যবহার করা হয়েছে যাতে লগইন ছাড়া এই পেজে যাওয়া না যায়
+        element: <PrivateRoute><Membership /></PrivateRoute>, // PrivateRoute ব্যবহার করা হয়েছে যাতে লগইন ছাড়া এই পেজে যাওয়া না যায়
       },
       {
         path: "/login",
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/post/:id",
+        element: <PostDetails />,
       },
     ],
   },
