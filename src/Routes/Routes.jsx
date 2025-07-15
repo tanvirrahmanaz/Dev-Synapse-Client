@@ -7,8 +7,11 @@ import Membership from "../pages/Membership";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../pages/Dashboard"; // Assuming you have a Dashboard component
 import PostDetails from "../pages/PostDetails"; // Assuming you have a PostDetails component
+import MyProfile from "../pages/DashBoard/MyProfile";
+import AddPost from "../pages/DashBoard/AddPost";
+import MyPosts from "../pages/DashBoard/MyPosts";
+import DashboardLayout from "../Layout/DashBoardLayout";
 const router = createBrowserRouter([
   {
     path: "/", // এটি হলো প্যারেন্ট রুট
@@ -38,6 +41,26 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+
+  {
+        path: 'dashboard',
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        children: [
+            {
+                path: 'my-profile',
+                element: <MyProfile />
+            },
+            {
+                path: 'add-post',
+                element: <AddPost />
+            },
+            {
+                path: 'my-posts',
+                element: <MyPosts />
+            }
+        ]
+    }
 ]);
 
 export default router;
