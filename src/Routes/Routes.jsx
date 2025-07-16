@@ -12,6 +12,10 @@ import MyProfile from "../pages/DashBoard/MyProfile";
 import AddPost from "../pages/DashBoard/AddPost";
 import MyPosts from "../pages/DashBoard/MyPosts";
 import DashboardLayout from "../Layout/DashBoardLayout";
+import CommentsPage from "../pages/DashBoard/CommentsPage"; // Importing the CommentsPage component
+import AdminRoute from './AdminRoute';
+import ManageUsers from '../pages/Admin/ManageUsers';
+import AdminProfile from '../pages/Admin/AdminProfile'; // Assuming you have an AdminProfile component
 const router = createBrowserRouter([
   {
     path: "/", // এটি হলো প্যারেন্ট রুট
@@ -44,23 +48,34 @@ const router = createBrowserRouter([
 
 
   {
-        path: 'dashboard',
-        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
-        children: [
-            {
-                path: 'my-profile',
-                element: <MyProfile />
-            },
-            {
-                path: 'add-post',
-                element: <AddPost />
-            },
-            {
-                path: 'my-posts',
-                element: <MyPosts />
-            }
-        ]
-    }
+    path: 'dashboard',
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    children: [
+      {
+        path: 'my-profile',
+        element: <MyProfile />
+      },
+      {
+        path: 'add-post',
+        element: <AddPost />
+      },
+      {
+        path: 'my-posts',
+        element: <MyPosts />
+      },
+      {
+        path: 'comments/:postId', // <-- এই ডাইনামিক রুটটি যোগ করুন
+        element: <CommentsPage />
+      },
+      // Admin Routes
+      { path: 'manage-users', element: <AdminRoute><ManageUsers /></AdminRoute> },
+      {
+        path: 'admin-profile',
+        element: <AdminRoute><AdminProfile /></AdminRoute>
+      }
+
+    ]
+  }
 ]);
 
 export default router;
