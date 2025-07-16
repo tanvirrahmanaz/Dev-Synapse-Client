@@ -16,6 +16,10 @@ import CommentsPage from "../pages/DashBoard/CommentsPage"; // Importing the Com
 import AdminRoute from './AdminRoute';
 import ManageUsers from '../pages/Admin/ManageUsers';
 import AdminProfile from '../pages/Admin/AdminProfile'; // Assuming you have an AdminProfile component
+import ReportedComments from '../pages/Admin/ReportedComments'; // Importing the ReportedComments component
+import ReportedActivities from '../pages/Admin/ReportedActivities'; // নতুন পেজ ইম্পোর্ট করুন
+import AnncouncementsPage from '../pages/AnnouncementsPage'; // Assuming you have an AnnouncementsPage component
+import MakeAnnouncement from '../pages/Admin/MakeAnnouncement'; // Importing the MakeAnnouncement component
 const router = createBrowserRouter([
   {
     path: "/", // এটি হলো প্যারেন্ট রুট
@@ -43,6 +47,10 @@ const router = createBrowserRouter([
         path: "/post/:id",
         element: <PostDetails />,
       },
+      {
+        path: '/announcements',
+        element : <AnncouncementsPage />, // Assuming you have an AnnouncementsPage component
+      }
     ],
   },
 
@@ -72,7 +80,20 @@ const router = createBrowserRouter([
       {
         path: 'admin-profile',
         element: <AdminRoute><AdminProfile /></AdminRoute>
-      }
+      },
+      {
+        path: 'manage-users',
+        element: <AdminRoute><ManageUsers /></AdminRoute>
+      },
+      {
+        path: 'make-announcement',
+        element: <AdminRoute><MakeAnnouncement /></AdminRoute>
+      },
+      {
+        path: 'reported-comments', // অথবা 'reported-activities'
+        element: <AdminRoute><ReportedActivities /></AdminRoute>
+      },
+
 
     ]
   }

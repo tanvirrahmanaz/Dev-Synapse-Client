@@ -13,7 +13,9 @@ const AdminProfile = () => {
     const { register, handleSubmit, reset } = useForm();
 
     // সাইটের পরিসংখ্যান আনার জন্য useQuery
-    const { data: stats, isLoading: isStatsLoading } = useQuery({
+    
+
+    const { data: stats = {}, isLoading: isStatsLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => (await axiosSecure.get('/admin-stats')).data
     });
