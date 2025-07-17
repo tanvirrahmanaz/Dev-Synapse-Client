@@ -25,6 +25,7 @@
     "react-share": "^5.2.2",
     "recharts": "^3.1.0",
     "sweetalert2": "^11.22.2",
+    "sweetalert2-react-content": "^5.1.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
