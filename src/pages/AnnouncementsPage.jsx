@@ -1,17 +1,39 @@
-// src/pages/AnnouncementsPage.jsx
-
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useContext } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { AuthContext } from '../providers/AuthProvider';
 import { FaBullhorn } from 'react-icons/fa';
 
 const AnnouncementsPage = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
+    const queryClient = useQueryClient();
 
+    // সব অ্যানাউন্সমেন্ট আনার জন্য useQuery
     const { data: announcements = [], isLoading } = useQuery({
         queryKey: ['allAnnouncements'],
-        queryFn: async () => (await axiosPublic.get('/announcements')).data
+        queryFn: async () => (await axiosPublic.get('/announcements')).data,
     });
+
+    // ব্যবহারকারীর "দেখা" স্ট্যাটাস আপডেট করার জন্য useMutation
+    const { mutate: markAsRead } = useMutation({
+        mutationFn: () => axiosSecure.post('/users/update-view-time'),
+        onSuccess: () => {
+            // সফলভাবে সময় আপডেট হওয়ার পর, Navbar এর কাউন্ট রিফ্রেশ করা
+            queryClient.invalidateQueries({ queryKey: ['newAnnouncementCount', user?.email] });
+            console.log("Marked as read, refetching count.");
+        },
+        onError: (err) => console.error("Failed to update view time", err),
+    });
+
+    // পেজটি লোড হওয়ার পর ব্যবহারকারীর শেষ ভিজিটের সময় আপডেট করা
+    useEffect(() => {
+        if (user) {
+            markAsRead();
+        }
+    }, [user, markAsRead]);
 
     if (isLoading) {
         return <div className="text-center my-20"><span className="loading loading-spinner loading-lg"></span></div>;
@@ -30,7 +52,7 @@ const AnnouncementsPage = () => {
                 <div className="space-y-6">
                     {announcements.map(announcement => (
                         <div key={announcement._id} className="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500">
-                            <div className="flex items-center gap-4 mb-3">
+                           <div className="flex items-center gap-4 mb-3">
                                 <img src={announcement.authorImage} alt={announcement.authorName} className="w-12 h-12 rounded-full" />
                                 <div>
                                     <p className="font-semibold">{announcement.authorName}</p>
