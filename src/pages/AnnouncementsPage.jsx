@@ -18,15 +18,18 @@ const AnnouncementsPage = () => {
     });
 
     // ব্যবহারকারীর "দেখা" স্ট্যাটাস আপডেট করার জন্য useMutation
-    const { mutate: markAsRead } = useMutation({
-        mutationFn: () => axiosSecure.post('/users/update-view-time'),
-        onSuccess: () => {
-            // সফলভাবে সময় আপডেট হওয়ার পর, Navbar এর কাউন্ট রিফ্রেশ করা
-            queryClient.invalidateQueries({ queryKey: ['newAnnouncementCount', user?.email] });
-            console.log("Marked as read, refetching count.");
-        },
-        onError: (err) => console.error("Failed to update view time", err),
-    });
+    
+// আপনার AnnouncementsPage.jsx এ এই mutation টি এভাবে change করুন:
+
+const { mutate: markAsRead } = useMutation({
+    mutationFn: () => axiosSecure.post('/users/update-view-time'), // অথবা '/users/viewed-announcements'
+    onSuccess: () => {
+        // সফলভাবে সময় আপডেট হওয়ার পর, Navbar এর কাউন্ট রিফ্রেশ করা
+        queryClient.invalidateQueries({ queryKey: ['newAnnouncements', user?.email] });
+        console.log("Marked as read, refetching count.");
+    },
+    onError: (err) => console.error("Failed to update view time", err),
+});
 
     // পেজটি লোড হওয়ার পর ব্যবহারকারীর শেষ ভিজিটের সময় আপডেট করা
     useEffect(() => {

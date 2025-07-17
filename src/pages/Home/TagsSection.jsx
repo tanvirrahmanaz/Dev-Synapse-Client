@@ -1,26 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
-const TagsSection = () => {
-    // এই ট্যাগগুলো আপনি সার্ভার থেকে আনতে পারেন অথবা হার্ডকোড করতে পারেন
-    const tags = ['react', 'javascript', 'nodejs', 'mongodb', 'express', 'css', 'python', 'nextjs'];
+// onTagClick নামে একটি prop গ্রহণ করা হচ্ছে
+const TagsSection = ({ onTagClick }) => {
+    const axiosPublic = useAxiosPublic();
+
+    // সার্ভার থেকে সব ট্যাগ আনার জন্য useQuery
+    const { data: tags = [], isLoading } = useQuery({
+        queryKey: ['tags'],
+        queryFn: async () => (await axiosPublic.get('/tags')).data
+    });
+
+    if (isLoading) {
+        return <div className="text-center"><span className="loading loading-dots"></span></div>;
+    }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8">
-            <h2 className="text-3xl font-bold text-center mb-6">Explore by Tags</h2>
+        <div className="max-w-4xl mx-auto px-4 py-12">
+            <h2 className="text-3xl font-bold text-center mb-8">Explore by Tags</h2>
             <div className="flex flex-wrap justify-center gap-3">
                 {tags.map(tag => (
-                    // প্রতিটি ট্যাগকে একটি লিংকে পরিণত করা হয়েছে যা সার্চ পেজে নিয়ে যাবে
-                    // তবে আমরা একই পেজে দেখানোর জন্য Link এর পরিবর্তে বাটন ব্যবহার করতে পারি
-                    // এবং হোমে থাকা সার্চ ফাংশনটিকে কল করতে পারি।
-                    // কিন্তু এখানে সহজ রাখার জন্য শুধু বাটন দেখানো হলো।
-                    // এই বাটনগুলো উপরের Banner কম্পোনেন্টের সার্চ ফাংশনকে ট্রিগার করতে পারে।
                     <button 
-                        key={tag}
+                        key={tag._id}
+                        // বাটনে ক্লিক করলে props হিসেবে আসা onTagClick ফাংশনটি কল হবে
+                        onClick={() => onTagClick(tag.name)}
                         className="btn btn-outline border-gray-300 hover:bg-green-500 hover:text-white hover:border-green-500 capitalize"
-                        // onClick={() => handleTagClick(tag)} // এই ফাংশনটি Home পেজ থেকে props হিসেবে আসবে
                     >
-                        #{tag}
+                        #{tag.name}
                     </button>
                 ))}
             </div>

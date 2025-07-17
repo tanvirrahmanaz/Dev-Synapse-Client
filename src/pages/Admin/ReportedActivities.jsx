@@ -1,5 +1,3 @@
-// src/pages/Admin/ReportedActivities.jsx
-
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
@@ -10,13 +8,13 @@ const ReportedActivities = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
 
-    // Tanstack Query দিয়ে সব রিপোর্ট আনা হচ্ছে
-    const { data: reports = [], isLoading, refetch } = useQuery({
+    // Tanstack Query দিয়ে সব রিপোর্ট আনা হচ্ছে
+    const { data: reports = [], isLoading } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => (await axiosSecure.get('/reports')).data
     });
 
-    // ব্যবস্থা নেওয়ার জন্য useMutation
+    // ব্যবস্থা নেওয়ার জন্য useMutation
     const takeActionMutation = useMutation({
         mutationFn: async ({ commentId, reportId }) => {
             // একসাথে দুটি কাজ করা: কমেন্ট ডিলিট এবং রিপোর্ট ডিলিট
