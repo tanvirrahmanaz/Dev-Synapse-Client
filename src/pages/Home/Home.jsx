@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { FaUser, FaComment, FaArrowUp, FaArrowDown, FaClock, FaTag, FaSearch, FaFire, FaCode, FaLaptop, FaServer, FaDatabase, FaMobile, FaGlobe, FaHome, FaExclamationCircle } from 'react-icons/fa';
 import { BiSortDown } from 'react-icons/bi';
@@ -25,6 +26,7 @@ const Home = () => {
     const [sortBy, setSortBy] = useState('latest');
     const [currentPage, setCurrentPage] = useState(1);
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['posts', searchTag, sortBy, currentPage],
@@ -63,6 +65,18 @@ const Home = () => {
         setCurrentPage(page);
         // স্মুথ স্ক্রল করার জন্য
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleCreatePostClick = () => {
+        navigate('/dashboard/add-post');
+    };
+
+    const handleBrowseCategoriesClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleViewAnnouncementsClick = () => {
+        navigate('/announcements');
     };
 
     // No posts found component
@@ -256,13 +270,13 @@ const Home = () => {
                         <div className="bg-gray-800 border border-green-500/20 rounded-lg p-6">
                             <h3 className="text-lg font-bold text-green-400 mb-4">Quick Actions</h3>
                             <div className="space-y-3">
-                                <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors font-medium">
+                                <button onClick={handleCreatePostClick} className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors font-medium">
                                     Create New Post
                                 </button>
-                                <button className="w-full bg-gray-700 hover:bg-gray-600 text-green-400 py-3 px-4 rounded-lg transition-colors font-medium">
+                                <button onClick={handleBrowseCategoriesClick} className="w-full bg-gray-700 hover:bg-gray-600 text-green-400 py-3 px-4 rounded-lg transition-colors font-medium">
                                     Browse Categories
                                 </button>
-                                <button className="w-full bg-gray-700 hover:bg-gray-600 text-green-400 py-3 px-4 rounded-lg transition-colors font-medium">
+                                <button onClick={handleViewAnnouncementsClick} className="w-full bg-gray-700 hover:bg-gray-600 text-green-400 py-3 px-4 rounded-lg transition-colors font-medium">
                                     View Announcements
                                 </button>
                             </div>
