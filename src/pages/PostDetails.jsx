@@ -23,6 +23,7 @@ import {
     FaLaptopCode
 } from 'react-icons/fa';
 import { FacebookShareButton, FacebookIcon, WhatsappShareButton, WhatsappIcon, TwitterShareButton, TwitterIcon } from 'react-share';
+import Avatar from '../components/Avatar';
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -213,11 +214,7 @@ const PostDetails = () => {
                         <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 sticky top-8">
                             <div className="text-center">
                                 <div className="relative inline-block mb-4">
-                                    <img 
-                                        src={post.authorImage} 
-                                        alt={post.authorName} 
-                                        className="w-20 h-20 rounded-full object-cover border-4 border-green-500/50" 
-                                    />
+                                    <Avatar user={{ photoURL: post.authorImage, displayName: post.authorName }} size="w-20 h-20" />
                                     <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-gray-800 flex items-center justify-center">
                                         <FaUser className="text-xs text-white" />
                                     </div>
@@ -339,11 +336,7 @@ const PostDetails = () => {
                             {user ? (
                                 <div className="mb-8 p-4 bg-gray-700/30 rounded-lg border border-gray-600">
                                     <div className="flex items-start gap-4">
-                                        <img 
-                                            src={user.photoURL} 
-                                            alt={user.displayName} 
-                                            className="w-10 h-10 rounded-full object-cover border-2 border-green-500/50" 
-                                        />
+                                        <Avatar user={user} size="w-10 h-10" />
                                         <div className="flex-1">
                                             <form onSubmit={handleCommentSubmit} className="space-y-4">
                                                 <textarea 
@@ -384,11 +377,7 @@ const PostDetails = () => {
                                     <div key={comment._id} className="bg-gray-700/30 border border-gray-600 rounded-lg p-4 transition-all hover:border-gray-500">
                                         <div className="flex items-start gap-4">
                                             <div className="relative">
-                                                <img 
-                                                    src={comment.commenterImage} 
-                                                    alt={comment.commenterName} 
-                                                    className="w-10 h-10 rounded-full object-cover border border-gray-600" 
-                                                />
+                                                <Avatar user={{ photoURL: comment.commenterImage, displayName: comment.commenterName }} size="w-10 h-10" />
                                                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-800 flex items-center justify-center">
                                                     <span className="text-xs text-white font-bold">
                                                         {index + 1}
@@ -493,3 +482,12 @@ const PostDetails = () => {
 };
 
 export default PostDetails;
+
+<style jsx>{`
+    .prose-invert a {
+        color: #34d399;
+    }
+    .prose-invert a:hover {
+        color: #10b981;
+    }
+`}</style>
