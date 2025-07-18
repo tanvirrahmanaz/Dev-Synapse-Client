@@ -17,9 +17,9 @@ const TagsSection = ({ onTagClick }) => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto px-4 py-4">
             <h2 className="text-3xl font-bold text-center mb-8">Explore by Tags</h2>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2">
                 {tags.map(tag => (
                     <button 
                         key={tag._id}

@@ -2,24 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { FaUser, FaComment, FaArrowUp, FaArrowDown, FaClock, FaTag, FaSearch, FaFire, FaCode, FaLaptop, FaServer, FaDatabase, FaMobile, FaGlobe, FaHome, FaExclamationCircle } from 'react-icons/fa';
+import { FaUser, FaComment, FaArrowUp, FaArrowDown, FaClock, FaTag, FaSearch, FaFire, FaCode, FaLaptop, FaServer, FaDatabase, FaMobile, FaGlobe, FaHome, FaExclamationCircle, FaJsSquare, FaReact, FaNodeJs, FaPython, FaCss3Alt, FaVuejs } from 'react-icons/fa';
+import { SiMongodb, SiExpress, SiTypescript } from 'react-icons/si';
 import { BiSortDown } from 'react-icons/bi';
 import Banner from './Banner';
 import PostsSection from '../../components/PostsSection';
 import TagsSection from './TagsSection';
-
-const popularTags = [
-  { name: 'JavaScript', count: 142, icon: <FaCode /> },
-  { name: 'React', count: 98, icon: <FaLaptop /> },
-  { name: 'Node.js', count: 87, icon: <FaServer /> },
-  { name: 'MongoDB', count: 76, icon: <FaDatabase /> },
-  { name: 'Python', count: 65, icon: <FaCode /> },
-  { name: 'CSS', count: 54, icon: <FaGlobe /> },
-  { name: 'Vue.js', count: 43, icon: <FaLaptop /> },
-  { name: 'Express', count: 39, icon: <FaServer /> },
-  { name: 'TypeScript', count: 35, icon: <FaCode /> },
-  { name: 'React Native', count: 28, icon: <FaMobile /> }
-];
 
 const Home = () => {
     const [searchTag, setSearchTag] = useState('');
@@ -27,6 +15,33 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
+
+
+    // সার্ভার থেকে জনপ্রিয় ট্যাগগুলো আনার জন্য useQuery
+    const { data: popularTags = [], isLoading: isTagsLoading } = useQuery({
+        queryKey: ['popularTags'],
+        queryFn: async () => (await axiosPublic.get('/tags/popular')).data
+    });
+
+    // ট্যাগ অনুযায়ী আইকন দেখানোর জন্য একটি হেল্পার ফাংশন
+    const getTagIcon = (tagName) => {
+        const lowerCaseTag = tagName.toLowerCase();
+        const iconMap = {
+            'javascript': <FaJsSquare />,
+            'react': <FaReact />,
+            'frontend': <FaReact />,
+            'backend': <FaServer />,
+            'nodejs': <FaNodeJs />,
+            'mongodb': <SiMongodb />,
+            'python': <FaPython />,
+            'css': <FaCss3Alt />,
+            'vue.js': <FaVuejs />,
+            'express': <SiExpress />,
+            'typescript': <SiTypescript />,
+            'react native': <FaReact />
+        };
+        return iconMap[lowerCaseTag] || <FaTag />; // ডিফল্ট আইকন
+    };
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['posts', searchTag, sortBy, currentPage],
@@ -219,9 +234,9 @@ const Home = () => {
                                     >
                                         <div className="flex items-center space-x-3">
                                             <span className="text-green-400 group-hover:text-white transition-colors">
-                                                {tag.icon}
+                                                {getTagIcon(tag.name)}
                                             </span>
-                                            <span className="text-white font-medium">{tag.name}</span>
+                                            <span className="text-white font-medium">{tag.name.charAt(0).toUpperCase() + tag.name.slice(1)}</span>
                                         </div>
                                         <span className="text-xs text-gray-400 bg-gray-600 px-2 py-1 rounded-full">
                                             {tag.count}
