@@ -34,6 +34,7 @@ const AnnouncementsPage = () => {
         if (user) {
             markAsRead();
         }
+        window.scrollTo(0, 0); // Add this line to scroll to top
     }, [user, markAsRead]);
 
     if (isLoading) {
