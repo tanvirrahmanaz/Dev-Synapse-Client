@@ -63,8 +63,6 @@ const Home = () => {
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
-        // স্মুথ স্ক্রল করার জন্য
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleCreatePostClick = () => {
@@ -72,7 +70,7 @@ const Home = () => {
     };
 
     const handleBrowseCategoriesClick = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0});
     };
 
     const handleViewAnnouncementsClick = () => {
