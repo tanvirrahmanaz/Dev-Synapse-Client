@@ -17,11 +17,13 @@ import ManageUsers from '../pages/Admin/ManageUsers';
 import MakeAnnouncement from '../pages/Admin/MakeAnnouncement';
 import ReportedActivities from '../pages/Admin/ReportedActivities'; // এই নামটি ব্যবহার করা হবে
 import AnnouncementsPage from '../pages/AnnouncementsPage';
+import ErrorPage from '../pages/ErrorPage'; // ErrorPage কম্পোনেন্টটি এখানে যুক্ত করা
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />, // ErrorPage কম্পোনেন্টটি এখানে যুক্ত করা
     children: [
       { path: "/", element: <Home /> },
       { path: "/membership", element: <PrivateRoute><Membership /></PrivateRoute> },
