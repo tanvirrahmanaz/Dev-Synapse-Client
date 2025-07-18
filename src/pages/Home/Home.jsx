@@ -8,6 +8,7 @@ import { BiSortDown } from 'react-icons/bi';
 import Banner from './Banner';
 import PostsSection from '../../components/PostsSection';
 import TagsSection from './TagsSection';
+import CommunityStats from './CommunityStats';
 
 const Home = () => {
     const [searchTag, setSearchTag] = useState('');
@@ -225,7 +226,7 @@ const Home = () => {
                                 <FaTag className="mr-2" />
                                 Popular Tags
                             </h3>
-                            <div className="space-y-2">
+                            <div className="space-y-4">
                                 {popularTags.map((tag, index) => (
                                     <button
                                         key={index}
@@ -247,42 +248,14 @@ const Home = () => {
                         </div>
 
                         {/* Community Stats */}
-                        <div className="bg-gray-800 border border-green-500/20 rounded-lg p-6">
-                            <h3 className="text-lg font-bold text-green-400 mb-4 flex items-center">
-                                <FaUser className="mr-2" />
-                                Community Stats
-                            </h3>
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
-                                    <div className="flex items-center space-x-2">
-                                        <FaCode className="text-green-400" />
-                                        <span className="text-gray-300">Total Posts</span>
-                                    </div>
-                                    <span className="text-green-400 font-bold text-lg">
-                                        {data?.totalPosts || 0}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
-                                    <div className="flex items-center space-x-2">
-                                        <FaUser className="text-green-400" />
-                                        <span className="text-gray-300">Active Users</span>
-                                    </div>
-                                    <span className="text-green-400 font-bold text-lg">567</span>
-                                </div>
-                                <div className="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
-                                    <div className="flex items-center space-x-2">
-                                        <FaComment className="text-green-400" />
-                                        <span className="text-gray-300">Total Comments</span>
-                                    </div>
-                                    <span className="text-green-400 font-bold text-lg">3,456</span>
-                                </div>
-                            </div>
-                        </div>
+                       <div className="max-w-7xl mx-auto">
+                 <CommunityStats></CommunityStats>
+            </div>
 
                         {/* Quick Actions */}
                         <div className="bg-gray-800 border border-green-500/20 rounded-lg p-6">
-                            <h3 className="text-lg font-bold text-green-400 mb-4">Quick Actions</h3>
-                            <div className="space-y-3">
+                            <h3 className="text-lg font-bold text-green-400 mb-4 flex items-center">Quick Actions</h3>
+                            <div className="space-y-4">
                                 <button onClick={handleCreatePostClick} className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors font-medium">
                                     Create New Post
                                 </button>

@@ -206,12 +206,12 @@ const Banner = ({ onSearch }) => {
                 }
                 
                 .animate-fadeInUp {
-                    animation: fadeInUp 0.8s ease-out forwards;
+                    animation: fadeInUp 0.4s ease-out forwards;
                     opacity: 0;
                 }
                 
                 .animate-expandWidth {
-                    animation: expandWidth 1.5s ease-out 1s forwards;
+                    animation: expandWidth 1s ease-out 1s forwards;
                     width: 0;
                 }
                 
@@ -220,11 +220,11 @@ const Banner = ({ onSearch }) => {
                 }
                 
                 .delay-500 {
-                    animation-delay: 0.5s;
+                    animation-delay: 0.3s;
                 }
                 
                 .delay-700 {
-                    animation-delay: 0.7s;
+                    animation-delay: 0.5s;
                 }
                 
                 .delay-1000 {

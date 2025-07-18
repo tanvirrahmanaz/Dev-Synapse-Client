@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
+import AuthLayout from "../Layout/AuthLayout"; // AuthLayout ইম্পোর্ট করা হলো
 import Home from "../pages/Home/Home";
 import Membership from "../pages/Membership";
 import Login from "../pages/Login";
@@ -27,11 +28,23 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/membership", element: <PrivateRoute><Membership /></PrivateRoute> },
-      { path: "/login", element: <Login /> },
-      { path: "/register", element: <Register /> },
       { path: "/post/:id", element: <PostDetails /> },
       { path: '/announcements', element: <AnnouncementsPage /> }
     ],
+  },
+  {
+    path: "/login",
+    element: <AuthLayout />,
+    children: [
+      { path: "/login", element: <Login /> }
+    ]
+  },
+  {
+    path: "/register",
+    element: <AuthLayout />,
+    children: [
+      { path: "/register", element: <Register /> }
+    ]
   },
   {
     path: 'dashboard',
