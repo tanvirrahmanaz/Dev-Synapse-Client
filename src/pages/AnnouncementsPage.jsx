@@ -4,6 +4,7 @@ import useAxiosPublic from '../hooks/useAxiosPublic';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { AuthContext } from '../providers/AuthProvider';
 import { FaBullhorn, FaCode, FaTerminal, FaClock, FaUser } from 'react-icons/fa';
+import Avatar from '../components/Avatar';
 
 const AnnouncementsPage = () => {
     const axiosPublic = useAxiosPublic();
@@ -129,11 +130,7 @@ const AnnouncementsPage = () => {
                                     {/* Author Info */}
                                     <div className="flex items-center gap-4 mb-6">
                                         <div className="relative">
-                                            <img 
-                                                src={announcement.authorImage} 
-                                                alt={announcement.authorName} 
-                                                className="w-12 h-12 rounded-full border-2 border-green-500/30 group-hover:border-green-500/60 transition-colors"
-                                            />
+                                            <Avatar user={{ photoURL: announcement.authorImage, displayName: announcement.authorName }} size="w-12 h-12" />
                                             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-800"></div>
                                         </div>
                                         <div>

@@ -18,6 +18,7 @@ import {
     FaPaperPlane,
     FaSpinner
 } from 'react-icons/fa';
+import Avatar from '../../components/Avatar';
 
 const MakeAnnouncement = () => {
     // AuthContext থেকে বর্তমান অ্যাডমিনের তথ্য নেওয়া হচ্ছে
@@ -201,11 +202,7 @@ const MakeAnnouncement = () => {
                         {/* Author Info Display */}
                         <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
                             <div className="flex items-center gap-3">
-                                <img 
-                                    src={user?.photoURL || '/default-avatar.png'} 
-                                    alt="Author" 
-                                    className="w-10 h-10 rounded-full border-2 border-green-400"
-                                />
+                                <Avatar user={user} size="w-10 h-10" />
                                 <div>
                                     <p className="font-mono text-sm text-gray-400">Publishing as:</p>
                                     <p className="font-mono text-green-400 font-bold">{user?.displayName || 'Admin'}</p>
@@ -325,11 +322,7 @@ const MakeAnnouncement = () => {
                         <div className={`bg-gray-700 rounded-lg p-6 border-l-4 ${getPriorityColor(watchedValues.title)}`}>
                             {/* Preview Header */}
                             <div className="flex items-center gap-3 mb-4">
-                                <img 
-                                    src={user?.photoURL || '/default-avatar.png'} 
-                                    alt="Author" 
-                                    className="w-8 h-8 rounded-full border-2 border-green-400"
-                                />
+                                <Avatar user={user} size="w-8 h-8" />
                                 <div>
                                     <p className="font-mono text-sm text-green-400 font-bold">
                                         {user?.displayName || 'Admin'}

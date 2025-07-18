@@ -26,7 +26,7 @@ const PostsSection = ({ posts, isLoading, totalPosts, currentPage, onPageChange 
     return (
         <div className="max-w-7xl mx-auto px-4 py-8">
             {/* Posts Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                 {posts.map(post => <PostCard key={post._id} post={post} />)}
             </div>
 

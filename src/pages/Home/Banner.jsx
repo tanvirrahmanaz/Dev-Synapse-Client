@@ -114,7 +114,7 @@ const Banner = ({ onSearch }) => {
                     </p>
 
                     {/* Animated Search Form */}
-                    <form onSubmit={handleFormSubmit} className="max-w-2xl mx-auto mb-8 animate-fadeInUp delay-700">
+                    <form onSubmit={handleFormSubmit} className="max-w-2xl mx-auto px-4 sm:px-0 mb-8 animate-fadeInUp delay-700">
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
                             <div className="relative flex bg-gray-800 border border-green-500/30 rounded-lg overflow-hidden hover:border-green-500/50 transition-all duration-300">
@@ -127,14 +127,14 @@ const Banner = ({ onSearch }) => {
                                     value={searchValue}
                                     onChange={handleInputChange}
                                     placeholder="Search by tags (e.g., react, nodejs, python)..."
-                                    className="flex-1 px-4 py-4 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-0 font-mono"
+                                    className="flex-1 px-4 py-3 md:py-4 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-0 font-mono text-sm md:text-base"
                                 />
                                 <button 
                                     type="submit" 
-                                    className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105"
+                                    className="px-4 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 text-sm md:text-base"
                                 >
-                                    <FaSearch className="inline mr-2" />
-                                    Search
+                                    <span className="hidden md:inline"><FaSearch className="inline mr-2" />Search</span>
+                                    <span className="inline md:hidden"><FaSearch /></span>
                                 </button>
                             </div>
                         </div>

@@ -160,7 +160,7 @@ const MyProfile = () => {
                 </div>
 
                 {recentPosts.length > 0 ? (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
                         {recentPosts.map(post => (
                             <div key={post._id} className="transform hover:scale-105 transition-transform duration-200">
                                 <PostCard post={post} />
