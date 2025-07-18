@@ -5,6 +5,7 @@ import {
     FaUserShield, FaUsers, FaFlag, FaBullhorn, FaBars,
     FaCode, FaCog, FaChartBar, FaTerminal
 } from 'react-icons/fa';
+import Avatar from '../components/Avatar';
 import { AuthContext } from '../providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
@@ -35,11 +36,7 @@ const DashboardLayout = () => {
             {/* Profile Section */}
             <div className="text-center mb-8 p-4 bg-gray-800 rounded-lg border border-gray-700">
                 <div className="relative inline-block">
-                    <img 
-                        src={user?.photoURL || '/default-avatar.png'} 
-                        alt="profile" 
-                        className="w-20 h-20 rounded-full mx-auto mb-3 border-4 border-green-400 shadow-lg" 
-                    />
+                    <Avatar user={user} size="w-20 h-20" />
                     <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-400 rounded-full border-2 border-gray-800"></div>
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{user?.displayName || 'Developer'}</h3>

@@ -4,6 +4,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import PostCard from '../../components/PostCard';
 import { FaCode, FaUsers, FaFire, FaComments, FaArrowUp, FaArrowDown, FaCalendarAlt, FaEdit, FaEye } from 'react-icons/fa';
+import Avatar from '../../components/Avatar';
 import { BiCodeAlt } from 'react-icons/bi';
 import { HiTerminal } from 'react-icons/hi';
 
@@ -64,11 +65,7 @@ const MyProfile = () => {
                 <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6">
                     {/* Profile Image */}
                     <div className="relative">
-                        <img 
-                            src={user.photoURL} 
-                            alt="profile" 
-                            className="w-32 h-32 rounded-full border-4 border-green-500 shadow-lg shadow-green-500/20" 
-                        />
+                        <Avatar user={user} size="w-32 h-32" />
                         <div className="absolute -bottom-2 -right-2 bg-green-500 rounded-full p-2">
                             <FaCode className="text-gray-900 text-lg" />
                         </div>

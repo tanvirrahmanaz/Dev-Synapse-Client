@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaBell, FaBars, FaTimes, FaUserCircle, FaTerminal, FaCode } from 'react-icons/fa';
+import { FaBell, FaBars, FaTimes, FaTerminal, FaCode } from 'react-icons/fa';
+import Avatar from './Avatar';
 import { AuthContext } from '../providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
@@ -119,15 +120,7 @@ const Navbar = () => {
                                     onClick={() => setDropdownOpen(!isDropdownOpen)} 
                                     className="flex text-sm rounded-full focus:outline-none ring-2 ring-offset-2 ring-green-400 ring-offset-gray-900 hover:ring-green-300 transition-all duration-200 transform hover:scale-105"
                                 >
-                                    {user.photoURL ? (
-                                        <img 
-                                            className="h-9 w-9 rounded-full object-cover border-2 border-green-400/50" 
-                                            src={user.photoURL} 
-                                            alt="Profile" 
-                                        />
-                                    ) : (
-                                        <FaUserCircle className="h-9 w-9 text-green-400" />
-                                    )}
+                                    <Avatar user={user} size="h-9 w-9" />
                                 </button>
                                 
                                 {isDropdownOpen && (
@@ -273,15 +266,7 @@ const Navbar = () => {
                             <div className="px-2">
                                 <div className="flex items-center px-3 mb-3">
                                     <div className="flex items-center gap-3">
-                                        {user.photoURL ? (
-                                            <img 
-                                                className="h-10 w-10 rounded-full object-cover border-2 border-green-400/50" 
-                                                src={user.photoURL} 
-                                                alt="Profile"
-                                            />
-                                        ) : (
-                                            <FaUserCircle className="h-10 w-10 text-green-400" />
-                                        )}
+                                        <Avatar user={user} size="h-10 w-10" />
                                         <div>
                                             <p className="text-base font-mono font-medium text-green-400">
                                                 {user.displayName || 'Developer'}

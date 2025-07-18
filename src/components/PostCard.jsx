@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaComments, FaArrowUp, FaClock } from 'react-icons/fa';
+import Avatar from './Avatar';
 
 const PostCard = ({ post }) => {
     // পোস্ট অবজেক্ট থেকে প্রয়োজনীয় ডেটা destructure করে নেওয়া হচ্ছে
@@ -32,11 +33,7 @@ const PostCard = ({ post }) => {
             <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:bg-gray-750 hover:border-green-500 transition-all duration-300 shadow-lg hover:shadow-green-500/20">
                 {/* কার্ডের উপরের অংশ: লেখকের তথ্য */}
                 <div className="flex items-center gap-3 mb-4">
-                    <div className="avatar">
-                        <div className="w-12 h-12 rounded-full ring-2 ring-green-500 ring-offset-2 ring-offset-gray-800">
-                            <img src={authorImage} alt={`${authorName}'s avatar`} className="rounded-full" />
-                        </div>
-                    </div>
+                    <Avatar user={{ photoURL: authorImage, displayName: authorName }} size="h-12 w-12" />
                     <div>
                         <p className="font-semibold text-green-400">{authorName}</p>
                         <div className='flex items-center gap-1 text-xs text-gray-400'>

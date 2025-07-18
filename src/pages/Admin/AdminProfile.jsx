@@ -15,6 +15,7 @@ import {
   FaGithub, FaLaptopCode, FaRocket, FaShieldAlt, FaBug,
   FaEye, FaHeart, FaShare, FaClock,FaFilter
 } from 'react-icons/fa';
+import Avatar from '../../components/Avatar';
 
 import { HiTrendingUp } from "react-icons/hi";
 
@@ -161,11 +162,7 @@ const AdminProfile = () => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="relative">
-                                <img 
-                                    src={user?.photoURL} 
-                                    alt="admin" 
-                                    className="w-16 h-16 rounded-full border-2 border-green-500"
-                                />
+                                <Avatar user={user} size="w-16 h-16" />
                                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
                                     <FaTerminal className="text-xs text-gray-900" />
                                 </div>
