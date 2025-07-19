@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 // Axios এর একটি কাস্টম ইনস্ট্যান্স তৈরি করা হচ্ছে
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000' // আপনার সার্ভারের URL
+    baseURL: 'https://dev-synapse.vercel.app/' // আপনার সার্ভারের URL
 });
 
 const useAxiosSecure = () => {

@@ -4,7 +4,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -12,12 +12,16 @@ const CheckoutForm = () => {
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const [processing, setProcessing] = useState(false);
+    const queryClient = useQueryClient();
+    const { user } = useContext(AuthContext);
 
     // ব্যবহারকারীকে গোল্ড মেম্বার বানানোর জন্য মিউটেশন
     const { mutate: makeMember } = useMutation({
         mutationFn: () => axiosSecure.patch(`/users/make-member`),
         onSuccess: () => {
             toast.success('Congratulations! You are now a Gold Member.');
+            // Invalidate the user query to refetch the data
+            queryClient.invalidateQueries(['dbUser', user?.email]);
             navigate('/dashboard/my-profile');
         }
     });
