@@ -2,9 +2,12 @@ import React, { useContext, useState } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { AuthContext } from '../providers/AuthProvider';
 import useAxiosSecure from '../hooks/useAxiosSecure';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -15,14 +18,31 @@ const CheckoutForm = () => {
     const queryClient = useQueryClient();
     const { user } = useContext(AuthContext);
 
-    // ব্যবহারকারীকে গোল্ড মেম্বার বানানোর জন্য মিউটেশন
     const { mutate: makeMember } = useMutation({
         mutationFn: () => axiosSecure.patch(`/users/make-member`),
-        onSuccess: () => {
-            toast.success('Congratulations! You are now a Gold Member.');
-            // Invalidate the user query to refetch the data
-            queryClient.invalidateQueries(['dbUser', user?.email]);
-            navigate('/dashboard/my-profile');
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['dbUser', user?.email]);
+            MySwal.fire({
+                title: 'Payment Successful!',
+                text: 'Congratulations! You are now a Gold Member.',
+                icon: 'success',
+                background: '#1f2937',
+                color: '#f3f4f6',
+                confirmButtonColor: '#22c55e',
+                confirmButtonText: 'Go to Profile',
+            }).then(() => {
+                navigate('/dashboard/my-profile');
+            });
+        },
+        onError: () => {
+            MySwal.fire({
+                title: 'Payment Failed',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                background: '#1f2937',
+                color: '#f3f4f6',
+                confirmButtonColor: '#ef4444',
+            });
         }
     });
 
@@ -37,24 +57,37 @@ const CheckoutForm = () => {
             confirmParams: {
                 payment_method_data: {
                     billing_details: {
-                        name: 'Guest User', // আপনি চাইলে AuthContext থেকে ব্যবহারকারীর নাম দিতে পারেন
+                        name: user?.displayName || 'Guest User',
                     },
                 },
             },
-            redirect: 'if_required', // পেমেন্ট সফল হলে রিডাইরেক্ট না করে এখানেই রেজাল্ট দিন
+            redirect: 'if_required',
         });
 
         if (confirmError) {
-            toast.error(confirmError.message);
+            MySwal.fire({
+                title: 'Payment Error',
+                text: confirmError.message,
+                icon: 'error',
+                background: '#1f2937',
+                color: '#f3f4f6',
+                confirmButtonColor: '#ef4444',
+            });
             setProcessing(false);
             return;
         }
 
         if (paymentIntent.status === 'succeeded') {
-            // পেমেন্ট সফল হলে, আমাদের সার্ভারে কল করে ব্যবহারকারীকে মেম্বার বানান
             makeMember();
         } else {
-            toast.error('Payment was not successful. Please try again.');
+            MySwal.fire({
+                title: 'Payment Not Successful',
+                text: 'Please try again.',
+                icon: 'warning',
+                background: '#1f2937',
+                color: '#f3f4f6',
+                confirmButtonColor: '#f59e0b',
+            });
         }
 
         setProcessing(false);
