@@ -2,7 +2,11 @@
 
 Welcome to the **client-side repository** of **Dev-Synapse**, a modern and feature-rich developer forum built using the **MERN stack**. It enables real-time interaction, role-based access, and an engaging UI/UX for tech communities.
 
-🌐 **Live Site:** <a href="_https://dev-synapse-404.web.app/ ">Live Link </a> <br>
+🌐 **Live Site:** <a href="https://dev-synapse-404.web.app/" target="_blank">
+    Live Link
+  </a>
+
+
 🛠️ **Server Code:** _[Server Repo URL]_
 
 ---
