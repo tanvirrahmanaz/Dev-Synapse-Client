@@ -1,119 +1,94 @@
-Dev-Synapse: A Modern MERN Stack Forum (Client Side)
-Welcome to the client-side repository for Dev-Synapse, a dynamic and feature-rich online forum built for developers to connect, share knowledge, and engage in technical discussions. This application is built with the MERN stack, featuring real-time updates, role-based access control, and a rich user experience.
+# 🚀 Dev-Synapse: A Modern MERN Stack Forum (Client Side)
 
-Live Site URL | Server Side Code
+Welcome to the **client-side repository** of **Dev-Synapse**, a modern and feature-rich developer forum built using the **MERN stack**. It enables real-time interaction, role-based access, and an engaging UI/UX for tech communities.
 
-Key Features
-This platform is packed with features for both regular users and administrators to ensure a seamless and engaging community experience.
+🌐 **Live Site:** <a href="_https://dev-synapse-404.web.app/ ">Live Link </a> <br>
+🛠️ **Server Code:** _[Server Repo URL]_
 
-General Features
-User Authentication: Secure user registration and login system using Firebase, including email/password and Google social login.
+---
 
-Dynamic Homepage: Displays all posts with pagination (5 posts per page), sorted by newest first.
+## 🧩 Key Features
 
-Tag-Based Search: A powerful search functionality allowing users to find posts based on relevant tags.
+### 🟦 General Features
 
-Popularity Sort: Users can sort the posts based on a popularity score calculated from upvotes and downvotes.
+- **🔐 Authentication**: Firebase-powered login (Email/Password + Google)
+- **🏠 Dynamic Homepage**: Posts listed with pagination (5 per page), newest first
+- **🏷️ Tag-Based Search**: Filter posts by relevant tags
+- **🔥 Popularity Sort**: Sort posts based on score (upvotes - downvotes)
+- **📄 Post Details**: View post content, votes, and comments
+- **👍 Advanced Voting**: Vote once, undo, or switch vote (YouTube-style)
+- **💬 Comments**: Authenticated users can comment on any post
+- **🚨 Reporting**: Report posts/comments for admin review
+- **🔗 Social Sharing**: Share posts via Facebook, WhatsApp, etc.
+- **📢 Announcements**: Admin messages shown with navbar badge for unseen ones
+- **📱 Responsive UI**: Fully optimized for all screen sizes
 
-Post Details Page: A dedicated page for each post showing detailed information, comments, and interaction options.
+---
 
-Advanced Voting System: YouTube-style upvote/downvote system where a user can vote only once, undo their vote, or switch their vote.
+### 👤 User Dashboard (Private)
 
-Interactive Commenting: Logged-in users can add comments to any post.
+- **🧑 My Profile**: Name, image, email, badge (Bronze/Gold), 3 latest posts
+- **➕ Add Post**: Rich post form; Bronze: max 5 posts, Gold: unlimited
+- **📋 My Posts**: View/delete your posts, see related comments
+- **💳 Membership**: Upgrade to Gold with Stripe-powered secure checkout
 
-Content Reporting: Users can report both posts and comments with specific feedback for admin review.
+---
 
-Social Sharing: Posts can be easily shared on platforms like Facebook and WhatsApp.
+### 🛡 Admin Dashboard (Role-Protected)
 
-Announcements: Admins can create announcements that are displayed on the homepage with a notification badge on the navbar for unseen announcements.
+- **📊 Analytics**: View total users, posts, and comments (Pie chart)
+- **🏷️ Tag Management**: Add or remove site-wide tags
+- **👥 Manage Users**: Filter/search by name/email, update roles
+- **📢 Make Announcement**: Post updates across the site
+- **🧾 Reported Activities**: View all reported content and take action
 
-Fully Responsive Design: The UI is optimized for desktop, tablet, and mobile devices.
+---
 
-User Dashboard (Private)
-My Profile: Displays user's name, image, email, and membership badge (Bronze/Gold), along with their 3 most recent posts.
+## ⚙️ Technologies Used
 
-Add Post: A feature-rich form for creating new posts. Normal users are limited to 5 posts, while Gold members have unlimited access.
+| Category              | Tools Used                                                   |
+|-----------------------|--------------------------------------------------------------|
+| **Frontend Core**     | React, Vite                                                  |
+| **Routing**           | React Router DOM                                             |
+| **Styling**           | Tailwind CSS, DaisyUI                                        |
+| **State Management**  | TanStack Query (React Query)                                 |
+| **API Handling**      | Axios (custom hooks for public & private requests)           |
+| **Authentication**    | Firebase                                                     |
+| **Forms**             | React Hook Form                                              |
+| **Notifications**     | React Hot Toast, SweetAlert2                                 |
+| **Icons & Charts**    | React Icons, Recharts                                        |
+| **Social Sharing**    | React Share                                                  |
+| **Payments**          | Stripe.js, React Stripe.js                                   |
 
-My Posts: A table view of all posts created by the user, with options to view comments and delete the post.
+---
 
-Membership Page: A secure page with a Stripe-powered checkout form for users to upgrade to a Gold membership.
+## 🛠 Local Setup
 
-Admin Dashboard (Private & Role-Protected)
-Admin Profile: An analytics dashboard showing site-wide statistics (total users, posts, comments) visualized with a pie chart.
+Follow these steps to run the project locally:
 
-Tag Management: Admins can add and remove tags for the entire site.
-
-Manage Users: A comprehensive user management table with server-side search by name/email and filtering by membership status. Admins can promote other users to an admin role or revoke admin status.
-
-Make Announcement: A dedicated form for admins to create and publish site-wide announcements.
-
-Reported Activities: A centralized page to view all user-submitted reports on posts and comments, with options for the admin to take action (e.g., delete the offending content).
-
-Technologies Used
-This project leverages a modern and powerful stack to deliver a high-performance user experience.
-
-Frontend:
-
-Core: React, Vite
-
-Routing: React Router DOM
-
-Styling: Tailwind CSS, DaisyUI
-
-State Management & Data Fetching: Tanstack Query (React Query)
-
-API Calls: Axios (with custom hooks for public and secure instances)
-
-Authentication: Firebase
-
-Forms: React Hook Form
-
-Notifications: React Hot Toast, SweetAlert2
-
-Icons: React Icons
-
-Charts: Recharts
-
-Social Sharing: React Share
-
-Payments: Stripe.js, React Stripe.js
-
-Setup and Installation
-To run this project locally, follow these steps:
-
-Clone the repository:
-
-Bash
-
+```bash
+# 1. Clone the repo
 git clone https://github.com/your-username/your-client-repo.git
-Navigate to the project directory:
 
-Bash
-
+# 2. Move into project directory
 cd your-client-repo
-Install dependencies:
 
-Bash
-
+# 3. Install dependencies
 npm install
-Create a .env.local file in the root of the project and add your environment variables. See the template below.
 
-Start the development server:
-
-Bash
-
+# 4. Start development server
 npm run dev
-The application should now be running on http://localhost:5173.
+```
 
-Environment Variables
-You need to create a .env.local file in the root of the client directory and add the following variables:
+App will be live at: http://localhost:5173
 
-Code snippet
-
-# Your Backend Server URL
+🔐 Environment Variables
+Create a .env.local file in the root of your project and add the following:
+```bash
+# Backend URL
 VITE_API_URL=http://localhost:5000
 
-# Your Firebase Project Configuration
+# Firebase Config
 VITE_APIKEY=your_firebase_apikey
 VITE_AUTHDOMAIN=your_firebase_authdomain
 VITE_PROJECTID=your_firebase_projectid
@@ -121,9 +96,16 @@ VITE_STORAGEBUCKET=your_firebase_storagebucket
 VITE_MESSAGINGSENDERID=your_firebase_messagingsenderid
 VITE_APPID=your_firebase_appid
 
-# Your Stripe Publishable Key (for payments)
-VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...your_stripe_publishable_key...
+# Stripe
+VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...your_key...
 
-# Your ImgBB API Key (for image uploads)
+# ImgBB
 VITE_IMGBB_API_KEY=your_imgbb_api_key
-Note: This is the client-side application. For full functionality, the corresponding server-side application must also be running.
+⚠ Note: This is the client-side app. You must also run the server-side for full functionality.
+```
+🤝 Contributing
+Contributions are welcome!
+Please fork the repo, create a feature branch, and submit a pull request.
+
+📄 License
+Licensed under the MIT License.
