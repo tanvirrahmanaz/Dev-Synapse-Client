@@ -7,7 +7,8 @@ Welcome to the **client-side repository** of **Dev-Synapse**, a modern and featu
   </a>
 
 
-🛠️ **Server Code:** _[Server Repo URL]_
+🛠️ **Server Code:** <a href="https://github.com/tanvirrahmanaz/Dev-Synapse-Server" target="_blank">
+    Server Side  </a>
 
 ---
 
